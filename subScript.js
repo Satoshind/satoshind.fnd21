@@ -61,7 +61,7 @@ function displayMessage(message, who) {
 
 async function generateAiMessage(message) {
   if (apiKey == "") {
-    return "APIキーが暗号化されております。テキストボックスにパスワードを入れてね";
+    return "APIキーが暗号化されております。テキストボックスにパスワードを入れてね　。PASS=XXXXXの形で入れてね。";
   }
   const characterOrder = {
     bird: "あなたは鳥です。語尾にクエをつけて話します。",
