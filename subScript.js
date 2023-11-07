@@ -61,7 +61,7 @@ function displayMessage(message, who) {
 
 async function generateAiMessage(message) {
   if (apiKey == "") {
-    return "APIキーが入力されていません。";
+    return "APIキーが暗号化されております。テキストボックスにパスワードを入れてね";
   }
   const characterOrder = {
     bird: "あなたは鳥です。語尾にクエをつけて話します。",
@@ -123,8 +123,13 @@ function showBalloon(element) {
 async function executeResponse(givenMessage, fromMe = true) {
   let yourMessage;
   if (fromMe) {
-    if (givenMessage.includes("APIKEY")) {
-      apiKey = givenMessage.split("=")[1];
+    if (givenMessage.includes("PASS")) {
+      const passPhrase = givenMessage.split("=")[1];
+      const encryptedTxt =
+        "U2FsdGVkX1++Zm8XvxVRIRXq4j7/EsyxzYz76vdXqeip09KGJfLVmG2JCTbaCEmKXXpw3UumolC2QGUBha5Mw/Btm19R9nWbl+xrvLZlLjE=";
+      apiKey = CryptoJS.AES.decrypt(encryptedTxt, passPhrase).toString(
+        CryptoJS.enc.Utf8
+      );
       console.log(apiKey);
       yourMessage = "APIKEYをいただきました。";
     } else {
@@ -194,3 +199,10 @@ function changeCharacter(element) {
   let objBalloon = document.getElementById(element.srcElement.offsetParent.id);
   objBalloon.className = "figSelectNone";
 }
+
+//chatgpt API キーを暗号化する。(chatgptのAPI キーをgitに上げたら一瞬で無効化されたため
+//暗号化コード
+//const passPhrase = "秘密"; //秘密
+//const targetTxt = "chatgpt APIキー";
+//const encryptedTxt = CryptoJS.AES.encrypt(targetTxt, passPhrase);
+//console.log(encryptedTxt.toString());
