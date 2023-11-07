@@ -1,0 +1,94 @@
+/* 基本Style設定 */
+body {
+  margin: 0;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+img {
+  max-width: 100%;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+/* 追加Style */
+section:nth-of-type(even) {
+  background-color: black;
+}
+
+section:nth-of-type(odd) {
+  background-color: black;
+}
+
+section {
+  overflow-x: hidden;
+  padding: calc(3vh + 3vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: serif;
+  min-height: 100vh;
+}
+section:nth-of-type(1) {
+  height: 100vh;
+}
+.ScrollMessage {
+  color: white;
+  font-size: calc(2rem + 1vw);
+  font-weight: 700;
+  text-align: center;
+}
+strong {
+  color: white;
+  font-weight: 600;
+}
+
+.typography-site-body {
+  color: rgb(134, 134, 139);
+  font-size: 21px;
+  line-height: 1.381002381;
+  font-weight: 600;
+  letter-spacing: 0.011em;
+  font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial,
+    sans-serif;
+}
+
+article {
+  max-width: 950px;
+  width: 92.5%;
+  background-color: black;
+  margin: calc(1.5vw + 1.5vh) auto;
+  padding: calc(3vw + 3vh);
+  box-shadow: 0 calc(1vw + 1vh) calc(1vw + 1vh) rgba(0, 0, 0, 0.05);
+}
+
+/* Scroll-Before */
+.fadeInBefore {
+  opacity: 0;
+  transition-duration: 1s, 0.6s;
+  transition-property: opacity, transform;
+  transition-timing-function: ease-out;
+}
+.fadeInDown {
+  transform: translate(0, 50%);
+}
+.fadeInLeft {
+  transform: translate(-50%, 0);
+}
+
+.fadeInRight {
+  transform: translate(50%, 0);
+}
+
+/* Scroll-After */
+.fadeInAfter {
+  transform: translate(0);
+  opacity: 1;
+}
