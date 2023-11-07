@@ -1,6 +1,6 @@
 "use strict";
 // 1行目に記載している 'use strict' は削除しないでください
-
+let apiKey = "";
 const characterList = ["bird", "gollira", "girlfriend", "shiritori"];
 const characterName = {
   bird: "焼き鳥",
@@ -47,9 +47,9 @@ function displayMessage(message, who) {
   }
   talkContent.insertAdjacentHTML("beforeend", messageHtml);
 
-  $(".toggle").on("click", function() {
+  $(".toggle").on("click", function () {
     $(".toggle").toggleClass("checked");
-    if(!$('input[name="check"]').prop("checked")) {
+    if (!$('input[name="check"]').prop("checked")) {
       $(".toggle input").prop("checked", true);
       responseMode = "AI";
     } else {
@@ -57,11 +57,12 @@ function displayMessage(message, who) {
       responseMode = "parrot";
     }
   });
-  
 }
 
 async function generateAiMessage(message) {
-  const apiKey = "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"; //今回は仕方なくコードに埋め込む。500円分使ったら終了。
+  if (apiKey == "") {
+    return "APIキーが入力されていません。";
+  }
   const characterOrder = {
     bird: "あなたは鳥です。語尾にクエをつけて話します。",
     gollira:
@@ -122,17 +123,27 @@ function showBalloon(element) {
 async function executeResponse(givenMessage, fromMe = true) {
   let yourMessage;
   if (fromMe) {
-    displayMessage(givenMessage, "me");
-    if (responseMode === "parrot") {
-      if (character === "girlfriend") {
-        yourMessage = givenMessage + "、さとし";
-      } else {
-        yourMessage = givenMessage;
+    if (givenMessage.includes("APIKEY")) {
+      apiKey = givenMessage.split("=")[1];
+      console.log(apiKey);
+      yourMessage = "APIKEYをいただきました。";
+    } else {
+      displayMessage(givenMessage, "me");
+      if (responseMode === "parrot") {
+        if (character === "girlfriend") {
+          yourMessage = givenMessage + "、さとし";
+        } else {
+          yourMessage = givenMessage;
+        }
+      } else if (responseMode === "AI") {
+        const response = await generateAiMessage(givenMessage);
+        if (typeof response == "string") {
+          yourMessage = response;
+        } else {
+          yourMessage = await response.choices[0].message.content;
+        }
+        console.log(yourMessage);
       }
-    } else if (responseMode === "AI") {
-      const response = await generateAiMessage(givenMessage);
-      yourMessage = await response.choices[0].message.content;
-      console.log(yourMessage);
     }
   } else {
     yourMessage = givenMessage;
