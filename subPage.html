@@ -9,21 +9,16 @@
     <link rel="stylesheet" href="subStyle.css" />
     <meta name="theme-color" content="#000000" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>  </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  </head>
 
   <body>
-    <!-- ▼LINE風ここから -->
     <div class="line__container">
-      <!-- タイトル -->
       <div class="line__title">おうむ返し</div>
-
-      <!-- ▼会話エリア scrollを外すと高さ固定解除 -->
       <div id="line__contents scroll">
-        <!-- ここに吹き出しやスタンプのタグを追加していく -->
-        <!-- 相手の吹き出し -->
         <div class="line__left">
-          <figure  id="figDefault">
-            <img src="bird.png" class="yourFigure"/>
+          <figure id="figDefault">
+            <img src="bird.png" class="yourFigure" />
             <ul class="figSelectNone" id="messageDefault">
               <img src="bird.png" class="birdSwitch" />
               <img src="gollira.png" class="golliraSwitch" />
@@ -39,13 +34,11 @@
           </div>
         </div>
       </div>
-      <!--　▲会話エリア ここまで -->
       <br />
-      <input type="text" id="textMessage" class = "textbox"/>
+      <input type="text" id="textMessage" class="textbox" />
       <input type="button" value="送る" onclick="sendMessage();" />
       <input type="button" value="話す" onclick="recordStart();" />
     </div>
-    <!--　▲LINE風 ここまで -->
   </body>
   <script type="text/javascript" src="subScript.js"></script>
 </html>
