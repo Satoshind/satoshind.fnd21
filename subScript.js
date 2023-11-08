@@ -38,15 +38,11 @@ function displayMessage(message, who) {
           <figure  id = "fig${numYourMessage}">
             <img src="${character}.png" class = "yourFigure"/>
             <ul class = "figSelectNone" id = "message${numYourMessage}">
-            <img src = "bird.png" class = "birdSwitch"/>
-            <img src = "gollira.png" class = "golliraSwitch"/>
-            <img src = "girlfriend.png" class = "girlfriendSwitch"/>
-            <img src = "shiritori.png" class = "shiritoriSwitch"/>
-            <div class="toggle">
-            <input type="checkbox" name="check"/>
-            <span>無能</span>
-            <span>知能</span>
-            </div>
+              <img src = "bird.png" class = "birdSwitch"/>
+              <img src = "gollira.png" class = "golliraSwitch"/>
+              <img src = "girlfriend.png" class = "girlfriendSwitch"/>
+              <img src = "shiritori.png" class = "shiritoriSwitch"/>
+              <input type = "submit" id = "toggle${numYourMessage}" value = "${responseMode}">
             </ul>
           </figure>
           <div class="line__left-text">
@@ -56,18 +52,6 @@ function displayMessage(message, who) {
         </div>`;
   }
   talkContent.insertAdjacentHTML("beforeend", messageHtml); //生成したhtmlをトーク画面に挿入する。
-
-  $(".toggle").on("click", function () {
-    //相手のメッセージが生成されるたびに知能or無能のトグルスイッチが生まれるので処理を紐づける
-    $(".toggle").toggleClass("checked");
-    if (!$('input[name="check"]').prop("checked")) {
-      $(".toggle input").prop("checked", true);
-      responseMode = "AI";
-    } else {
-      $(".toggle input").prop("checked", false);
-      responseMode = "parrot";
-    }
-  });
 }
 
 /**
@@ -207,6 +191,20 @@ async function executeResponse(givenMessage, fromMe = true) {
       changeCharacter
     );
   }
+  //相手のメッセージが生成されるたびにオウム返しorAIのトグルスイッチが生まれるので処理を紐づける
+  const toggle = document.querySelector(`#toggle${numYourMessage - 1}`);
+
+  toggle.addEventListener("click", function () {
+    if (responseMode === "AI") {
+      responseMode = "parrot";
+    } else {
+      responseMode = "AI";
+    }
+    for (let i = 0; i <= numYourMessage - 1; i++) {
+      const oldToggle = document.querySelector(`#toggle${i}`); //既存のトグルスイッチの表示をすべて更新する
+      oldToggle.value = responseMode;
+    }
+  });
 }
 
 /**
