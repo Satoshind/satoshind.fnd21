@@ -154,6 +154,8 @@ async function executeResponse(givenMessage, fromMe = true) {
       ); //復号化
       console.log(apiKey);
       yourMessage = "APIKEYをいただきました。";
+    } else if (givenMessage.includes("苦労した点")) {
+      yourMessage = "・どのアイコンを押しても吹き出しが出る。<br>・すべてのアイコンの吹き出しに最新の状態が反映されている。<br>・chatgptのapiキーをgithubに上げたら一瞬で無効化されたので暗号化した。<br>先生の皆様、生徒の皆様今までありがとうございました。"
     } else {
       displayMessage(givenMessage, "me");
       if (responseMode === "parrot") {
